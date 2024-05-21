@@ -5,8 +5,8 @@ import {Stack} from './RootStackNavigator';
 
 import React from 'react';
 
-import HomeScreen from '../screens/Home';
-import ProfileScreen from '../screens/Profile';
+import HomeScreen from '@/screens/Home';
+import ProfileScreen from '@/screens/Profile';
 
 function Router(): React.JSX.Element {
   return (

@@ -3,7 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Button, Text, View} from 'react-native';
 
-import {RootStackNavigatorParamsList} from '../../router/RootStackNavigator';
+import {RootStackNavigatorParamsList} from '@/routes/RootStackNavigator';
 
 const HomeScreen = () => {
   const navigation =
