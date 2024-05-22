@@ -1,12 +1,15 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  title: {
-    fontFamily: 'Inter-Medium',
-    fontSize: 24,
-    marginBottom: 25,
-    marginTop: 25,
-    textAlign: 'center',
+  messageBtn: {
+    border: '1px solid black',
+  },
+  titleWrapper: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 8,
   },
 });
 

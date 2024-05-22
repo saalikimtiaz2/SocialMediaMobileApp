@@ -1,10 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
+import Title from '../../components/Title';
+import styles from './styles';
 
 import {RootStackNavigatorParamsList} from '@/routes/RootStackNavigator';
-import Styles from './styles';
 
 const HomeScreen = () => {
   const navigation =
@@ -15,8 +16,12 @@ const HomeScreen = () => {
   };
   return (
     <View>
-      <Text style={Styles.title}>HomeScreen</Text>
-      <Button onPress={() => onHandlePress()} title={'Profile'} />
+      <View style={styles.titleWrapper}>
+        <Title text={`Let's Explore`} />
+        <Pressable style={styles.messageBtn} onPress={() => onHandlePress()}>
+          <Text>Profile</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };
