@@ -23,6 +23,7 @@
 		DF5B81D4D7A74E5B8F039D56 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 734C8B346C1B489D89982A25 /* Inter-Regular.ttf */; };
 		269E5490406649FF9C31CDE3 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 100BDB2A3156448A98D3E60A /* Inter-SemiBold.ttf */; };
 		6DE19B201B2F43E99F14CF6F /* Inter-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09372552F2A3464D95ECCC57 /* Inter-Thin.ttf */; };
+		E9030C98B7AC46419F83F1C7 /* helper.ts in Resources */ = {isa = PBXBuildFile; fileRef = 509D303B968C4583AB13F328 /* helper.ts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		734C8B346C1B489D89982A25 /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../src/assets/Fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		100BDB2A3156448A98D3E60A /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter-SemiBold.ttf"; path = "../src/assets/Fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		09372552F2A3464D95ECCC57 /* Inter-Thin.ttf */ = {isa = PBXFileReference; name = "Inter-Thin.ttf"; path = "../src/assets/Fonts/Inter-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		509D303B968C4583AB13F328 /* helper.ts */ = {isa = PBXFileReference; name = "helper.ts"; path = "../src/assets/Fonts/helper.ts"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				734C8B346C1B489D89982A25 /* Inter-Regular.ttf */,
 				100BDB2A3156448A98D3E60A /* Inter-SemiBold.ttf */,
 				09372552F2A3464D95ECCC57 /* Inter-Thin.ttf */,
+				509D303B968C4583AB13F328 /* helper.ts */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				DF5B81D4D7A74E5B8F039D56 /* Inter-Regular.ttf in Resources */,
 				269E5490406649FF9C31CDE3 /* Inter-SemiBold.ttf in Resources */,
 				6DE19B201B2F43E99F14CF6F /* Inter-Thin.ttf in Resources */,
+				E9030C98B7AC46419F83F1C7 /* helper.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
