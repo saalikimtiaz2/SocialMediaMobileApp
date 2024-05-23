@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import colors from '@/styles/colors';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import Title from '../../components/Title';
 
@@ -10,6 +11,12 @@ import UserStory from '@/components/UserStory';
 import {RootStackNavigatorParamsList} from '@/routes/RootStackNavigator';
 import globalStyles from '@/styles/globalStyles';
 import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
+
+type userStoryTypes = {
+  firstName: string;
+  id: number;
+  profileImage: any;
+};
 
 const HomeScreen = () => {
   const navigation =
@@ -19,7 +26,7 @@ const HomeScreen = () => {
     navigation.navigate('Messages');
   };
 
-  const userStories = [
+  const userStories: userStoryTypes[] = [
     {
       firstName: 'Joseph',
       id: 1,
@@ -67,6 +74,65 @@ const HomeScreen = () => {
     },
   ];
 
+  const userStoriesPageSize = 4;
+
+  /* --------------- Local States --------------- */
+
+  const [userStoriesCurrentPage, setUserStoriesCurrentPage] =
+    useState<number>(1);
+  const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<
+    userStoryTypes[]
+  >([]);
+  const [isLoadingUserStories, setIsLoadingUserStories] =
+    useState<boolean>(false);
+
+  /* --------------- Custom Functions --------------- */
+
+  const pagination = (
+    database: userStoryTypes[],
+    currentPage: number,
+    pageSize: number,
+  ) => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    if (startIndex >= database.length) {
+      return [];
+    }
+    return database.slice(startIndex, endIndex);
+  };
+
+  const loadMoreStories = () => {
+    if (isLoadingUserStories) return;
+    setIsLoadingUserStories(true);
+    const nextPage = userStoriesCurrentPage + 1;
+    const contentToAppend = pagination(
+      userStories,
+      nextPage,
+      userStoriesPageSize,
+    );
+    if (contentToAppend.length > 0) {
+      setUserStoriesCurrentPage(nextPage);
+      setUserStoriesRenderedData(prevStories => [
+        ...prevStories,
+        ...contentToAppend,
+      ]);
+    }
+    setIsLoadingUserStories(false);
+  };
+
+  /* --------------- useEffects --------------- */
+
+  useEffect(() => {
+    setIsLoadingUserStories(true);
+    const getInitialData: userStoryTypes[] = pagination(
+      userStories,
+      1,
+      userStoriesPageSize,
+    );
+    setUserStoriesRenderedData([...getInitialData]);
+    setIsLoadingUserStories(false);
+  }, []);
+
   return (
     <View>
       {/* --------------- Header Section --------------- */}
@@ -84,11 +150,14 @@ const HomeScreen = () => {
       {/* --------------- User Stories Section --------------- */}
       <View style={globalStyles.userStoryContainer}>
         <FlatList
+          onEndReachedThreshold={0.5}
+          onEndReached={() => loadMoreStories()}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          data={userStories}
+          data={userStoriesRenderedData}
           renderItem={({item}) => (
             <UserStory
+              key={'userStory' + item.id}
               firstName={item.firstName}
               profileImage={item.profileImage}
             />
