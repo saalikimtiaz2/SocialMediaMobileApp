@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import UserProfileImage from '../UserProfileImage';
 import styles from './styles';
 
 const UserStory = ({
@@ -11,9 +12,7 @@ const UserStory = ({
 }) => {
   return (
     <View style={styles.storyContainer}>
-      <View style={styles.imageContainer}>
-        <Image source={profileImage} />
-      </View>
+      <UserProfileImage profileImage={profileImage} imageDimensions={65} />
       <Text style={styles.userName}>{firstName}</Text>
     </View>
   );
