@@ -1,11 +1,15 @@
+import colors from '@/styles/colors';
+import styles from '@/styles/globalStyles';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Title from '../../components/Title';
-import styles from './styles';
 
 import {RootStackNavigatorParamsList} from '@/routes/RootStackNavigator';
+import globalStyles from '@/styles/globalStyles';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
 
 const HomeScreen = () => {
   const navigation =
@@ -16,11 +20,16 @@ const HomeScreen = () => {
   };
   return (
     <View>
-      <View style={styles.titleWrapper}>
+      <View style={styles.header}>
         <Title text={`Let's Explore`} />
-        <Pressable style={styles.messageBtn} onPress={() => onHandlePress()}>
-          <Text>Profile</Text>
-        </Pressable>
+        <TouchableOpacity
+          style={styles.messageIcon}
+          onPress={() => onHandlePress()}>
+          <FontAwesomeIcon icon={faEnvelope} color={colors.accent} size={20} />
+          <View style={globalStyles.messageNumberContainer}>
+            <Text style={globalStyles.messageNumber}>2</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
