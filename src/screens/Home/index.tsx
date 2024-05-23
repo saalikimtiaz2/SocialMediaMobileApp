@@ -16,7 +16,7 @@ const HomeScreen = () => {
     useNavigation<StackNavigationProp<RootStackNavigatorParamsList>>();
 
   const onHandlePress = () => {
-    navigation.navigate('Profile');
+    navigation.navigate('Messages');
   };
 
   const userStories = [
