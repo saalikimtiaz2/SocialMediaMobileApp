@@ -7,6 +7,7 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import Title from '../../components/Title';
 
+import UserPost from '@/components/UserPost';
 import UserStory from '@/components/UserStory';
 import {RootStackNavigatorParamsList} from '@/routes/RootStackNavigator';
 import globalStyles from '@/styles/globalStyles';
@@ -17,6 +18,15 @@ type userStoryTypes = {
   id: number;
   profileImage: any;
 };
+// type userPostTypes = {
+//   firstName: string;
+//   lastName: string;
+//   location: string;
+//   likes: number;
+//   comments: number;
+//   bookmarks: number;
+//   id: number;
+// };
 
 const HomeScreen = () => {
   const navigation =
@@ -74,10 +84,56 @@ const HomeScreen = () => {
     },
   ];
 
+  const userPosts = [
+    {
+      firstName: 'Huzaifa',
+      lastName: 'Sajjad',
+      location: 'Sharjah, AE',
+      likes: 258,
+      comments: 25,
+      bookmarks: 70,
+      id: 1,
+    },
+    {
+      firstName: 'Muhammad',
+      lastName: 'Muheet',
+      location: 'Islamabad, PK',
+      likes: 358,
+      comments: 23,
+      bookmarks: 50,
+      id: 2,
+    },
+    {
+      firstName: 'Fahim',
+      lastName: 'Khan',
+      location: 'G-13, ISB',
+      likes: 201,
+      comments: 15,
+      bookmarks: 10,
+      id: 3,
+    },
+    {
+      firstName: 'Daniyal',
+      lastName: 'Lodhi',
+      location: 'Margalla Town, ISB',
+      likes: 233,
+      comments: 33,
+      bookmarks: 89,
+      id: 4,
+    },
+    {
+      firstName: 'Usman',
+      lastName: 'Umer',
+      location: 'I-9, ISB',
+      likes: 117,
+      comments: 9,
+      bookmarks: 5,
+      id: 5,
+    },
+  ];
+
+  /* --------------- Handling User Stories --------------- */
   const userStoriesPageSize = 4;
-
-  /* --------------- Local States --------------- */
-
   const [userStoriesCurrentPage, setUserStoriesCurrentPage] =
     useState<number>(1);
   const [userStoriesRenderedData, setUserStoriesRenderedData] = useState<
@@ -85,6 +141,14 @@ const HomeScreen = () => {
   >([]);
   const [isLoadingUserStories, setIsLoadingUserStories] =
     useState<boolean>(false);
+
+  /* --------------- Handling User Posts --------------- */
+  // const userPostsPageSize = 4;
+  // const [userPostsCurrentPage, setUserPostsCurrentPage] = useState<number>(1);
+  // const [userPostsRenderedData, setUserPostsRenderedData] = useState<
+  //   userPostTypes[]
+  // >([]);
+  // const [isLoadingUserPosts, setIsLoadingUserPosts] = useState<boolean>(false);
 
   /* --------------- Custom Functions --------------- */
 
@@ -133,8 +197,19 @@ const HomeScreen = () => {
     setIsLoadingUserStories(false);
   }, []);
 
+  // useEffect(() => {
+  //   setIsLoadingUserPosts(true);
+  //   const getInitialData: userPostTypes[] = pagination(
+  //     userPosts,
+  //     1,
+  //     userPostsPageSize,
+  //   );
+  //   setUserStoriesRenderedData([...getInitialData]);
+  //   setIsLoadingUserStories(false);
+  // }, []);
+
   return (
-    <View>
+    <View style={{backgroundColor: colors.white}}>
       {/* --------------- Header Section --------------- */}
       <View style={globalStyles.header}>
         <Title text={`Let's Explore`} />
@@ -160,6 +235,23 @@ const HomeScreen = () => {
               key={'userStory' + item.id}
               firstName={item.firstName}
               profileImage={item.profileImage}
+            />
+          )}
+        />
+      </View>
+      {/* --------------- User's Posts Section --------------- */}
+      <View>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={userPosts}
+          renderItem={({item}) => (
+            <UserPost
+              firstName={item.firstName}
+              lastName={item.lastName}
+              location={item.location}
+              likes={item.likes}
+              comments={item.comments}
+              bookmarks={item.bookmarks}
             />
           )}
         />
