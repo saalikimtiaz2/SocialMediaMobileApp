@@ -18,15 +18,15 @@ type userStoryTypes = {
   id: number;
   profileImage: any;
 };
-// type userPostTypes = {
-//   firstName: string;
-//   lastName: string;
-//   location: string;
-//   likes: number;
-//   comments: number;
-//   bookmarks: number;
-//   id: number;
-// };
+type userPostTypes = {
+  firstName: string;
+  lastName: string;
+  location: string;
+  likes: number;
+  comments: number;
+  bookmarks: number;
+  id: number;
+};
 
 const HomeScreen = () => {
   const navigation =
@@ -84,7 +84,7 @@ const HomeScreen = () => {
     },
   ];
 
-  const userPosts = [
+  const userPosts: userPostTypes[] = [
     {
       firstName: 'Huzaifa',
       lastName: 'Sajjad',
@@ -143,17 +143,17 @@ const HomeScreen = () => {
     useState<boolean>(false);
 
   /* --------------- Handling User Posts --------------- */
-  // const userPostsPageSize = 4;
-  // const [userPostsCurrentPage, setUserPostsCurrentPage] = useState<number>(1);
-  // const [userPostsRenderedData, setUserPostsRenderedData] = useState<
-  //   userPostTypes[]
-  // >([]);
-  // const [isLoadingUserPosts, setIsLoadingUserPosts] = useState<boolean>(false);
+  const userPostsPageSize = 2;
+  const [userPostsCurrentPage, setUserPostsCurrentPage] = useState<number>(1);
+  const [userPostsRenderedData, setUserPostsRenderedData] = useState<
+    userPostTypes[]
+  >([]);
+  const [isLoadingUserPosts, setIsLoadingUserPosts] = useState<boolean>(false);
 
   /* --------------- Custom Functions --------------- */
 
   const pagination = (
-    database: userStoryTypes[],
+    database: userStoryTypes[] | userPostTypes[],
     currentPage: number,
     pageSize: number,
   ) => {
@@ -173,7 +173,7 @@ const HomeScreen = () => {
       userStories,
       nextPage,
       userStoriesPageSize,
-    );
+    ) as userStoryTypes[]; // Ensure the type is userStoryTypes[]
     if (contentToAppend.length > 0) {
       setUserStoriesCurrentPage(nextPage);
       setUserStoriesRenderedData(prevStories => [
@@ -184,66 +184,96 @@ const HomeScreen = () => {
     setIsLoadingUserStories(false);
   };
 
+  const loadMorePosts = () => {
+    if (isLoadingUserPosts) return;
+    setIsLoadingUserPosts(true);
+    const nextPage = userPostsCurrentPage + 1;
+    const contentToAppend = pagination(
+      userPosts,
+      nextPage,
+      userPostsPageSize,
+    ) as userPostTypes[]; // Ensure the type is userStoryTypes[]
+    if (contentToAppend.length > 0) {
+      setUserPostsCurrentPage(nextPage);
+      setUserPostsRenderedData(prevStories => [
+        ...prevStories,
+        ...contentToAppend,
+      ]);
+    }
+    setIsLoadingUserPosts(false);
+  };
+
   /* --------------- useEffects --------------- */
 
   useEffect(() => {
+    // --------------------For User Stories------------------------
     setIsLoadingUserStories(true);
     const getInitialData: userStoryTypes[] = pagination(
       userStories,
       1,
       userStoriesPageSize,
-    );
+    ) as userStoryTypes[]; // Ensure the type is userStoryTypes[]
     setUserStoriesRenderedData([...getInitialData]);
     setIsLoadingUserStories(false);
-  }, []);
 
-  // useEffect(() => {
-  //   setIsLoadingUserPosts(true);
-  //   const getInitialData: userPostTypes[] = pagination(
-  //     userPosts,
-  //     1,
-  //     userPostsPageSize,
-  //   );
-  //   setUserStoriesRenderedData([...getInitialData]);
-  //   setIsLoadingUserStories(false);
-  // }, []);
+    // --------------------For User Posts------------------------
+
+    setIsLoadingUserPosts(true);
+    const getInitialPostData: userPostTypes[] = pagination(
+      userPosts,
+      1,
+      userPostsPageSize,
+    ) as userPostTypes[]; // Ensure the type is userPostTypes[]
+    setUserPostsRenderedData([...getInitialPostData]);
+    setIsLoadingUserPosts(false);
+  }, []);
 
   return (
     <View style={{backgroundColor: colors.white}}>
-      {/* --------------- Header Section --------------- */}
-      <View style={globalStyles.header}>
-        <Title text={`Let's Explore`} />
-        <TouchableOpacity
-          style={globalStyles.messageIcon}
-          onPress={() => onHandlePress()}>
-          <FontAwesomeIcon icon={faEnvelope} color={colors.accent} size={20} />
-          <View style={globalStyles.messageNumberContainer}>
-            <Text style={globalStyles.messageNumber}>2</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      {/* --------------- User Stories Section --------------- */}
-      <View style={globalStyles.userStoryContainer}>
-        <FlatList
-          onEndReachedThreshold={0.5}
-          onEndReached={() => loadMoreStories()}
-          showsHorizontalScrollIndicator={false}
-          horizontal={true}
-          data={userStoriesRenderedData}
-          renderItem={({item}) => (
-            <UserStory
-              key={'userStory' + item.id}
-              firstName={item.firstName}
-              profileImage={item.profileImage}
-            />
-          )}
-        />
-      </View>
       {/* --------------- User's Posts Section --------------- */}
       <View>
         <FlatList
+          ListHeaderComponent={
+            <>
+              {/* --------------- Header Section --------------- */}
+              <View style={globalStyles.header}>
+                <Title text={`Let's Explore`} />
+                <TouchableOpacity
+                  style={globalStyles.messageIcon}
+                  onPress={() => onHandlePress()}>
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    color={colors.accent}
+                    size={20}
+                  />
+                  <View style={globalStyles.messageNumberContainer}>
+                    <Text style={globalStyles.messageNumber}>2</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              {/* --------------- User Stories Section --------------- */}
+              <View style={globalStyles.userStoryContainer}>
+                <FlatList
+                  onEndReachedThreshold={0.5}
+                  onEndReached={() => loadMoreStories()}
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={userStoriesRenderedData}
+                  renderItem={({item}) => (
+                    <UserStory
+                      key={'userStory' + item.id}
+                      firstName={item.firstName}
+                      profileImage={item.profileImage}
+                    />
+                  )}
+                />
+              </View>
+            </>
+          }
+          onEndReachedThreshold={0.5}
+          onEndReached={() => loadMorePosts()}
           showsVerticalScrollIndicator={false}
-          data={userPosts}
+          data={userPostsRenderedData}
           renderItem={({item}) => (
             <UserPost
               firstName={item.firstName}

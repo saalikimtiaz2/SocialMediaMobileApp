@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
   reactionContainer: {
     flexDirection: 'row',
-    gap: 16,
+    gap: 27,
     marginTop: 16,
   },
   reactionText: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     fontFamily: getFontFamily('Inter', '400'),
     fontSize: 14,
   },
-  reactionWrapper: {flexDirection: 'row', gap: 6},
+  reactionWrapper: {flexDirection: 'row', gap: 3},
   userContainer: {
     alignItems: 'center',
     flexDirection: 'row',
