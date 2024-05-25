@@ -15,7 +15,7 @@ const globalStyles = StyleSheet.create({
   messageIcon: {
     backgroundColor: colors.grey,
     borderRadius: 100,
-    paddingHorizontal: horizontalScale(14),
+    paddingHorizontal: horizontalScale(16),
     paddingVertical: verticalScaling(14),
   },
   messageNumber: {
