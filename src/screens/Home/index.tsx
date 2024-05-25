@@ -206,7 +206,7 @@ const HomeScreen = () => {
   /* --------------- useEffects --------------- */
 
   useEffect(() => {
-    // --------------------For User Stories------------------------
+    // For User Stories
     setIsLoadingUserStories(true);
     const getInitialData: userStoryTypes[] = pagination(
       userStories,
@@ -216,7 +216,7 @@ const HomeScreen = () => {
     setUserStoriesRenderedData([...getInitialData]);
     setIsLoadingUserStories(false);
 
-    // --------------------For User Posts------------------------
+    // For User Posts
 
     setIsLoadingUserPosts(true);
     const getInitialPostData: userPostTypes[] = pagination(
