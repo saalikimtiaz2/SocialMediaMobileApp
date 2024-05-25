@@ -38,7 +38,7 @@ const UserPost: FC<userPostPropsTypes> = ({
         <View style={styles.userDetailsContainer}>
           <View>
             <Text style={styles.username}>{firstName + ' ' + lastName}</Text>
-            <Text>{location}</Text>
+            <Text style={styles.location}>{location}</Text>
           </View>
           <FontAwesomeIcon icon={faEllipsis} color={colors.accent} size={24} />
         </View>

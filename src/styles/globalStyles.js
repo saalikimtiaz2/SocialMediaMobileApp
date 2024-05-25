@@ -12,7 +12,7 @@ const globalStyles = StyleSheet.create({
     marginTop: 17,
   },
   messageIcon: {
-    backgroundColor: colors.ligtGrey,
+    backgroundColor: colors.grey,
     borderRadius: 100,
     padding: 14,
   },

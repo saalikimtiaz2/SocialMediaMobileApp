@@ -1,8 +1,13 @@
 import {getFontFamily} from '@/assets/Fonts/helper';
 import colors from '@/styles/colors';
+import {horizontalScale, verticalScaling} from '@/styles/scaling';
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+  location: {
+    color: colors.accent,
+    fontSize: 8,
+  },
   postContainer: {
     borderBottomColor: colors.lightGrey,
     borderBottomWidth: 1,
@@ -12,8 +17,10 @@ const styles = StyleSheet.create({
   },
   postImage: {
     flex: 1,
-    height: 220,
+    height: horizontalScale(188),
+    justifyContent: 'center',
     resizeMode: 'cover',
+    width: verticalScaling(235),
   },
 
   reactionContainer: {
